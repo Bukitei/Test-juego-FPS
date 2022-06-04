@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public TextMeshProUGUI roundSurvivedText;
     public TextMeshProUGUI enemiesKilled;
+    public GameObject pausePanel;
 
     void Start()
     {
@@ -69,5 +70,22 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
+    }
+
+    public void OnMenuButton(){
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
+    }
+
+    public void Pause(){
+        Time.timeScale = 0;
+        pausePanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void Resume(){
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

@@ -24,6 +24,7 @@ public class TouchPlayerMovement : MonoBehaviour
     private Vector2 lookInput;
     [SerializeField]private float cameraSensibility;
     private float cameraPitch;
+    public Transform playerCamera;
 
     void Start()
     {
@@ -38,6 +39,10 @@ public class TouchPlayerMovement : MonoBehaviour
 
         if(leftFingerID != -1){
             Move();
+        }
+
+        if(rightFingerID != -1){
+            LookAround();
         }
     }
 
@@ -60,15 +65,19 @@ public class TouchPlayerMovement : MonoBehaviour
                 if(leftFingerID == t.fingerId){
                     moveInput = t.position - moveTouchStartPosition;
                 }else if(rightFingerID == t.fingerId){
-
+                    lookInput = t.deltaPosition * cameraSensibility * Time.deltaTime;
                 }
             }
             if(t.phase == TouchPhase.Stationary){
-
+                if(rightFingerID == t.fingerId){
+                    lookInput = Vector2.zero;
+                }
             }
             if(t.phase == TouchPhase.Ended){
                 if(leftFingerID == t.fingerId){
                     leftFingerID = -1;
+                }else if(rightFingerID == t.fingerId){
+                    rightFingerID = -1;
                 }
             }
         }
@@ -94,5 +103,12 @@ public class TouchPlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+    }
+
+    private void LookAround(){
+        cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90f);
+        playerCamera.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
+
+        transform.Rotate(Vector3.up, lookInput.x);
     }
 }
