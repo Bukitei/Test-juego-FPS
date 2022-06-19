@@ -40,6 +40,14 @@ public class GameManager : MonoBehaviour
             }
             NextWaves(round);
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+                if(Time.timeScale == 1){
+                    Pause();
+                }else if(Time.timeScale == 0){
+                    Resume();
+                }
+        }
     }
 
     public void NextWaves(int round)

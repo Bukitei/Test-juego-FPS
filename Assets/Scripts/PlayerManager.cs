@@ -6,14 +6,10 @@ public class PlayerManager : MonoBehaviour
     public float health = 100f;
     public TextMeshProUGUI healthText;
     public GameManager gameManager;
-    void Start()
-    {
-        
-    }
+    public GameObject playerCamera;
 
-    void Update()
-    { 
-
+    private void Update(){
+        CameraShake();
     }
 
     public void Hit(float damage)
@@ -24,5 +20,9 @@ public class PlayerManager : MonoBehaviour
         {
             gameManager.GameOver();
         }
+    }
+
+    public void CameraShake(){
+        playerCamera.transform.localRotation = Quaternion.Euler(Random.Range(-2f, 2f), 0, 0);
     }
 }
