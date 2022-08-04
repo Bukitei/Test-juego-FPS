@@ -8,8 +8,11 @@ public class WeaponManager : MonoBehaviour
     public float range = 100f;
     public float damage = 10f;
     public Animator playerAnimator;
-    public AudioClip shootClip;
+    public ParticleSystem flashParticleSystem;
+    public GameObject bloodParticleSystem;
+    public AudioClip gunShootClip;
     public AudioSource weaponAudioSource;
+
     void Start()
     {
         weaponAudioSource = GetComponent<AudioSource>();
@@ -30,12 +33,15 @@ public class WeaponManager : MonoBehaviour
     private void Shoot(){
 
         playerAnimator.SetBool("isShooting", true);
-        weaponAudioSource.PlayOneShot(shootClip, 1);
+        flashParticleSystem.Play();
+        weaponAudioSource.PlayOneShot(gunShootClip, volumeScale: 1);
 
         RaycastHit hit;
         if(Physics.Raycast(playerCam.transform.position, transform.forward, out hit, range)){
             if(hit.transform.tag == "Enemy"){
                 hit.transform.GetComponent<EnemyManager>().Hit(damage);
+                GameObject particleInstance = Instantiate(bloodParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+                particleInstance.transform.parent = hit.transform;
             }
             else{
                 Debug.Log("Hitted another thing");

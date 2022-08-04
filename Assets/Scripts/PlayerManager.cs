@@ -8,8 +8,21 @@ public class PlayerManager : MonoBehaviour
     public GameManager gameManager;
     public GameObject playerCamera;
 
+    private float shakeTime = 1;
+    private float shakeDuration = 0.5f;
+    private Quaternion playerCameraOriginalRotation;
+
+    private void Start() {
+        playerCameraOriginalRotation = playerCamera.transform.localRotation;
+    }
+
     private void Update(){
-        CameraShake();
+        if(shakeTime < shakeDuration){
+            shakeTime += Time.deltaTime;
+            CameraShake();
+        }else if(playerCamera.transform.localRotation != playerCameraOriginalRotation){
+            playerCamera.transform.localRotation = playerCameraOriginalRotation;
+        }
     }
 
     public void Hit(float damage)
@@ -19,6 +32,8 @@ public class PlayerManager : MonoBehaviour
         if(health <= 0)
         {
             gameManager.GameOver();
+        }else{
+            shakeTime = 0;
         }
     }
 
