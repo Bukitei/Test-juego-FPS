@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI enemiesKilled;
     public GameObject pausePanel;
 
+    public Animator fadePanelAnimator;
+
     void Start()
     {
         gameAudioSource = GetComponent<AudioSource>();
@@ -83,6 +85,11 @@ public class GameManager : MonoBehaviour
     public void OnMenuButton(){
         Time.timeScale = 1;
         AudioListener.volume = 1;
+        fadePanelAnimator.SetTrigger("FadeIn");
+        Invoke("LoadMainMenuScene", 0.5f);
+    }
+
+    public void LoadMainMenuScene(){
         SceneManager.LoadScene(1);
     }
 
