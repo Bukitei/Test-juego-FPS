@@ -2625,6 +2625,7 @@ MonoBehaviour:
   enemiesKilled: {fileID: 339803141}
   pausePanel: {fileID: 1115984102}
   fadePanelAnimator: {fileID: 746673050}
+  weaponManager: {fileID: 5332540601310718295}
 --- !u!4 &2001800555
 Transform:
   m_ObjectHideFlags: 0
@@ -4569,7 +4570,8 @@ MonoBehaviour:
   damage: 20
   playerAnimator: {fileID: 6633253582090544964}
   flashParticleSystem: {fileID: 262865548}
-  bloodParticleSystem: {fileID: 921204668460223999, guid: 7a703e23c69f8184f9c1ea7b5447ac0c, type: 3}
+  bloodParticleSystem: {fileID: 921204668460223984, guid: 7a703e23c69f8184f9c1ea7b5447ac0c, type: 3}
+  concreteParticleSystem: {fileID: 921204668460223984, guid: 71e1f53126c0ee44cba3782e1a6abd0e, type: 3}
   gunShootClip: {fileID: 8300000, guid: da1211bb3f5a1ab4b9725294e576ec2c, type: 3}
   weaponAudioSource: {fileID: 0}
   weaponSway: {fileID: 5332540601310718297}

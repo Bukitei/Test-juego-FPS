@@ -19,8 +19,8 @@ public class WeaponSway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("MouseX") * swaySensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("MouseY") * swaySensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * swaySensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * swaySensitivity * Time.deltaTime;
 
         mouseX = Mathf.Clamp(mouseX, -swayClamp, swayClamp);
         mouseY = Mathf.Clamp(mouseY, -swayClamp, swayClamp);

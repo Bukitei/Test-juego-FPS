@@ -13,6 +13,7 @@ public class WeaponManager : MonoBehaviour
     public Animator playerAnimator;
     public ParticleSystem flashParticleSystem;
     public GameObject bloodParticleSystem;
+    public GameObject concreteParticleSystem;
     public AudioClip gunShootClip;
     public AudioSource weaponAudioSource;
     public WeaponSway weaponSway;
@@ -85,6 +86,7 @@ public class WeaponManager : MonoBehaviour
                 particleInstance.transform.parent = hit.transform;
             }
             else{
+                Instantiate(concreteParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
                 Debug.Log("Hitted another thing");
             }
         }

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     public Animator fadePanelAnimator;
 
+    public WeaponManager weaponManager;
+
     void Start()
     {
         gameAudioSource = GetComponent<AudioSource>();
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        weaponManager.enabled = false;
         gameOverPanel.SetActive(true);
         roundSurvivedText.text = round.ToString();
         enemiesKilled.text = killed.ToString();
@@ -95,12 +98,14 @@ public class GameManager : MonoBehaviour
 
     public void Pause(){
         Time.timeScale = 0;
+        weaponManager.enabled = false;
         pausePanel.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         AudioListener.volume = 0;
     }
 
     public void Resume(){
+        weaponManager.enabled = true;
         pausePanel.SetActive(false);
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
